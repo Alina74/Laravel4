@@ -1,24 +1,45 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Страница авторизации</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-</head>
-<body>
-<form action="{{route('logIn')}}" method="post" class="mt-3">
-    @if(session()->has('errorSuccess'))
-        <h3>{{session()->get('errorSuccess')}}</h3>
-    @endif
-    @csrf
-    <input type="text" name="login" placeholder="Ваш логин" class="form-control w-25"><br>
-    @error('login')<p>{{$message}}</p>@enderror
-    <input type="password" name="password" placeholder="Ваш пароль" class="form-control w-25"><br>
-    @error('password')<p>{{$message}}</p>@enderror
-    <input type="submit" value="Авторизоваться" class="btn btn-primary">
-</form>
-</body>
-</html>
+@extends('index')
+@yield('Страница авторизации')
+@section('content')
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-6">
+                <form action="{{ route('logIn')}}" method="post" class="mt-3">
+                    @if(session()->has('errorSuccess'))
+                        <div class="alert alert-danger">{{session()->get('errorSuccess')}}</div>
+                    @endif
+                    @csrf
+                    <div class="mb-3">
+                        <label for="inputLogin" class="form-label">Ваш логин</label>
+                        <input type="text"
+                               class="form-control @error('login') is-invalid @enderror"
+                               id="inputLogin"
+                               name="login"
+                               aria-describedby="invalidLogin">
+                        @error('login')
+                        <div id="invalidLogin" class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputPassword" class="form-label">Ваш пароль</label>
+                        <input type="password"
+                               class="form-control @error('password') is-invalid @enderror"
+                               id="inputPassword"
+                               name="password"
+                               aria-describedby="invalidPassword">
+                        @error('password')
+                        <div id="invalidPassword" class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                        @enderror
+                    </div>
+                    <button type="submit" class="btn btn-primary">Авторизация</button>
+                </form>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+@endsection
