@@ -1,11 +1,11 @@
 @extends('index')
-@yield('Страница авторизации')
+@section('title','Страница авторизации')
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col"></div>
             <div class="col-6">
-                <form action="{{ route('logIn')}}" method="post" class="mt-3">
+                <form action="{{ route('login')}}" method="post" class="mt-3">
                     @if(session()->has('errorSuccess'))
                         <div class="alert alert-danger">{{session()->get('errorSuccess')}}</div>
                     @endif

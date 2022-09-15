@@ -14,4 +14,12 @@ class MainController extends Controller
     {
         return view('welcome');
     }
+
+    public function staticManager()
+    {
+        $name="Сайт робототехники";
+        $address="г. Челябинск, Энтузиастов 17";
+        $time="с 9:00 до 18:00";
+        return view('staticManager', ["nameSite"=>$name, "address"=>$address, "time"=>$time]);
+    }
 }

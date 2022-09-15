@@ -9,16 +9,23 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Главная</a>
                 </li>
+                @auth
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Новости</a>
+                    <a class="nav-link" href="{{route('staticManager')}}">Статическая информация</a>
                 </li>
+                @endauth
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Аккаунт
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{route('logIn')}}">Авторизация</a></li>
-                        <li><a class="dropdown-item" href="{{route('register')}}">Регистрация</a></li>
+                        @guest
+                            <li><a class="dropdown-item" href="{{route('login')}}">Авторизация</a></li>
+                            <li><a class="dropdown-item" href="{{route('register')}}">Регистрация</a></li>
+                        @endguest
+                        @auth
+                            <li><a class="dropdown-item" href="{{route('logout')}}">Выход</a></li>
+                        @endauth
                     </ul>
                 </li>
             </ul>

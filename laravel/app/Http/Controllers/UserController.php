@@ -58,4 +58,16 @@ class UserController extends Controller
         User::create($data);
         return back()->with(['success'=>true]);
     }
+
+    /**
+     * Выход из системы
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function logout(Request $request)
+    {
+        auth()->logout();
+        $request->session()->regenerate();
+        return redirect()->route('welcome');
+    }
 }
